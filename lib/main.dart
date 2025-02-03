@@ -4,8 +4,7 @@ import 'package:gestion_app/home/views/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'auth/providers/auth_provider.dart';
-
-
+import 'routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,14 +28,22 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           useMaterial3: true,
         ),
-        home: Consumer<AuthProvider>(
-          builder: (context, auth, _) {
-            return auth.isAuthenticated
-                ? const HomeScreen() // Crea esta página
-                : const LoginScreen(); // Crea esta página
-
-          },
-        ),
+        routes: routes,
+        initialRoute: '/',
+        onGenerateRoute: (settings) {
+          if (settings.name == '/') {
+            return MaterialPageRoute(
+              builder: (context) => Consumer<AuthProvider>(
+                builder: (context, auth, _) {
+                  return auth.isAuthenticated
+                      ? const HomeScreen()
+                      : const LoginScreen();
+                },
+              ),
+            );
+          }
+          return null;
+        },
       ),
     );
   }

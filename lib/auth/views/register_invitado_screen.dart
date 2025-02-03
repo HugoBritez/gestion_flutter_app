@@ -94,7 +94,7 @@ class _RegisterInvitadoScreenState extends State<RegisterInvitadoScreen> {
       prefixIconColor: kPrimaryColor,
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: kPrimaryColor, width: 2),
+        borderSide: const BorderSide(color: kPrimaryColor, width: 1),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
@@ -102,11 +102,11 @@ class _RegisterInvitadoScreenState extends State<RegisterInvitadoScreen> {
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: kErrorColor, width: 2),
+        borderSide: const BorderSide(color: kErrorColor, width: 1),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: kErrorColor, width: 2),
+        borderSide: const BorderSide(color: kErrorColor, width: 1),
       ),
     );
   }
@@ -125,7 +125,7 @@ class _RegisterInvitadoScreenState extends State<RegisterInvitadoScreen> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(16.0),
           child: Card(
             elevation: 0,
             color: Colors.white,
@@ -133,7 +133,7 @@ class _RegisterInvitadoScreenState extends State<RegisterInvitadoScreen> {
               borderRadius: BorderRadius.circular(16),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(32.0),
+              padding: const EdgeInsets.all(4.0),
               child: Form(
                 key: _formKey,
                 child: Column(

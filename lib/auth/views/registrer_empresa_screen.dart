@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../../colors.dart';
+import 'package:flutter/services.dart';
 
 class RegisterEmpresaScreen extends StatefulWidget {
   const RegisterEmpresaScreen({super.key});
@@ -62,16 +63,21 @@ class _RegisterEmpresaScreenState extends State<RegisterEmpresaScreen> {
         horizontal: 16,
         vertical: 16,
       ),
+      isCollapsed: false,
+      constraints: const BoxConstraints(
+        maxWidth: double.infinity,
+      ),
       labelStyle: TextStyle(
         color: kNeutralDark.withOpacity(0.7),
       ),
+
       hintStyle: TextStyle(
         color: kNeutralDark.withOpacity(0.5),
       ),
       prefixIconColor: kPrimaryColor,
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: kPrimaryColor, width: 2),
+        borderSide: const BorderSide(color: kPrimaryColor, width: 1),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
@@ -79,11 +85,11 @@ class _RegisterEmpresaScreenState extends State<RegisterEmpresaScreen> {
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: kErrorColor, width: 2),
+        borderSide: const BorderSide(color: kErrorColor, width: 1),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
-        borderSide: BorderSide(color: kErrorColor, width: 2),
+        borderSide: const BorderSide(color: kErrorColor, width: 1),
       ),
     );
   }
@@ -111,9 +117,11 @@ class _RegisterEmpresaScreenState extends State<RegisterEmpresaScreen> {
           context: context,
           barrierDismissible: false,
           builder: (context) => AlertDialog(
+            backgroundColor: kBackgroundLight,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
+
             title: const Text(
               'Registro Exitoso',
               style: TextStyle(
@@ -142,15 +150,38 @@ class _RegisterEmpresaScreenState extends State<RegisterEmpresaScreen> {
                   decoration: BoxDecoration(
                     color: kBackgroundLight,
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: kPrimaryColor),
+                    border: Border.all(color: kNeutralDark),
                   ),
-                  child: SelectableText(
-                    codigoInvitacion,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: kPrimaryColor,
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: SelectableText(
+                          codigoInvitacion,
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: kNeutralDark,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.copy, color: kNeutralDark),
+                        onPressed: () {
+                          Clipboard.setData(
+                              ClipboardData(text: codigoInvitacion));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Código copiado al portapapeles'),
+                              backgroundColor: kNeutralDark,
+                              duration:  Duration(seconds: 2),
+
+                            ),
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -171,6 +202,7 @@ class _RegisterEmpresaScreenState extends State<RegisterEmpresaScreen> {
                   Navigator.of(context).pop(); // Volver a login
                 },
                 style: TextButton.styleFrom(
+                  
                   foregroundColor: kPrimaryColor,
                 ),
                 child: const Text('Entendido'),
@@ -204,7 +236,7 @@ class _RegisterEmpresaScreenState extends State<RegisterEmpresaScreen> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(16.0),
           child: Card(
             elevation: 0,
             color: Colors.white,
@@ -212,7 +244,7 @@ class _RegisterEmpresaScreenState extends State<RegisterEmpresaScreen> {
               borderRadius: BorderRadius.circular(16),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(32.0),
+              padding: const EdgeInsets.all(4.0),
               child: Form(
                 key: _formKey,
                 child: Column(

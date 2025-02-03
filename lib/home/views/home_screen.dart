@@ -14,21 +14,13 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
-          'Gestión de Stock',
+          'Inicio',
           style: TextStyle(
             color: kNeutralDark,
             fontWeight: FontWeight.bold,
           ),
         ),
         iconTheme: const IconThemeData(color: kPrimaryColor),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () async {
-              await context.read<AuthProvider>().logout();
-            },
-          ),
-        ],
       ),
       drawer: Drawer(
         backgroundColor: Colors.transparent,
@@ -59,9 +51,9 @@ class HomeScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(
                         vertical: 24, horizontal: 16),
-                    decoration: BoxDecoration(
+                    decoration:const BoxDecoration(
                       color: kBackgroundLight,
-                      borderRadius: const BorderRadius.only(
+                      borderRadius:  BorderRadius.only(
                         topLeft: Radius.circular(16),
                         topRight: Radius.circular(16),
                       ),
@@ -157,34 +149,28 @@ class HomeScreen extends StatelessWidget {
                           title: 'Inventario',
                           onTap: () {
                             Navigator.pop(context);
-                            // TODO: Navegar a inventario
-                          },
-                        ),
-                        _buildMenuItem(
-                          icon: Icons.category,
-                          title: 'Categorías',
-                          onTap: () {
-                            Navigator.pop(context);
-                            // TODO: Navegar a categorías
-                          },
-                        ),
-                        _buildMenuItem(
-                          icon: Icons.store,
-                          title: 'Depósitos',
-                          onTap: () {
-                            Navigator.pop(context);
-                            // TODO: Navegar a depósitos
+                            Navigator.pushNamed(context, '/inventory');
                           },
                         ),
                         if (userData?['rol'] == 1)
+
                           _buildMenuItem(
                             icon: Icons.people,
                             title: 'Usuarios',
                             onTap: () {
                               Navigator.pop(context);
-                              // TODO: Navegar a usuarios
+                              Navigator.pushNamed(context, '/users');
                             },
+
                           ),
+                           _buildMenuItem(
+                          icon: Icons.settings,
+                          title: 'Configuración',
+                          onTap: () {
+                            Navigator.pop(context);
+                            Navigator.pushNamed(context, '/settings');
+                          },
+                        ),
                       ],
                     ),
                   ),

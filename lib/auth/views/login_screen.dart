@@ -33,6 +33,8 @@ class _LoginScreenState extends State<LoginScreen> {
               _emailController.text,
               _passwordController.text,
             );
+        if (!mounted) return;
+        Navigator.pushReplacementNamed(context, '/');
       } catch (e) {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
@@ -268,12 +270,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           Expanded(
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
+                                Navigator.pushNamed(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const RegisterEmpresaScreen(),
-                                  ),
+                                  '/register/empresa',
                                 );
                               },
                               style: ElevatedButton.styleFrom(
@@ -300,12 +299,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           Expanded(
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
+                                Navigator.pushNamed(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const RegisterInvitadoScreen(),
-                                  ),
+                                  '/register/invitado',
                                 );
                               },
                               style: ElevatedButton.styleFrom(
